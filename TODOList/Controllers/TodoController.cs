@@ -22,14 +22,14 @@ namespace TODOList.Controllers
 
         // GET: api/TodoLists
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Todo>>> GetTodoLists()
+        public async Task<ActionResult<IEnumerable<Todo>>> Get()
         {
             return await _context.TodoList.ToListAsync();
         }
 
         // GET: api/TodoLists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Todo>> GetTodoList(int id)
+        public async Task<ActionResult<Todo>> GetById(int id)
         {
             var todoList = await _context.TodoList.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace TODOList.Controllers
         // PUT: api/TodoLists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoList(int id, Todo todoList)
+        public async Task<IActionResult> Put(int id, Todo todoList)
         {
             if (id != todoList.Id)
             {
@@ -75,7 +75,7 @@ namespace TODOList.Controllers
         // POST: api/TodoLists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Todo>> PostTodoList(Todo todoList)
+        public async Task<ActionResult<Todo>> Post(Todo todoList)
         {
             _context.TodoList.Add(todoList);
             try
@@ -99,7 +99,7 @@ namespace TODOList.Controllers
 
         // DELETE: api/TodoLists/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoList(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var todoList = await _context.TodoList.FindAsync(id);
             if (todoList == null)
