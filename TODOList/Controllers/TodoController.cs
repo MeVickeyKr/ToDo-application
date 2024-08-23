@@ -11,27 +11,27 @@ namespace TODOList.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TodoListsController : ControllerBase
+    public class TodoController : ControllerBase
     {
-        private readonly TodoListDatabaseContext _context;
+        private readonly TodoDatabaseContext _context;
 
-        public TodoListsController(TodoListDatabaseContext context)
+        public TodoController(TodoDatabaseContext context)
         {
             _context = context;
         }
 
         // GET: api/TodoLists
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TodoList>>> GetTodoLists()
+        public async Task<ActionResult<IEnumerable<Todo>>> GetTodoLists()
         {
-            return await _context.TodoLists.ToListAsync();
+            return await _context.TodoList.ToListAsync();
         }
 
         // GET: api/TodoLists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TodoList>> GetTodoList(int id)
+        public async Task<ActionResult<Todo>> GetTodoList(int id)
         {
-            var todoList = await _context.TodoLists.FindAsync(id);
+            var todoList = await _context.TodoList.FindAsync(id);
 
             if (todoList == null)
             {
@@ -44,7 +44,7 @@ namespace TODOList.Controllers
         // PUT: api/TodoLists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoList(int id, TodoList todoList)
+        public async Task<IActionResult> PutTodoList(int id, Todo todoList)
         {
             if (id != todoList.Id)
             {
@@ -75,9 +75,9 @@ namespace TODOList.Controllers
         // POST: api/TodoLists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TodoList>> PostTodoList(TodoList todoList)
+        public async Task<ActionResult<Todo>> PostTodoList(Todo todoList)
         {
-            _context.TodoLists.Add(todoList);
+            _context.TodoList.Add(todoList);
             try
             {
                 await _context.SaveChangesAsync();
@@ -101,13 +101,13 @@ namespace TODOList.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoList(int id)
         {
-            var todoList = await _context.TodoLists.FindAsync(id);
+            var todoList = await _context.TodoList.FindAsync(id);
             if (todoList == null)
             {
                 return NotFound();
             }
 
-            _context.TodoLists.Remove(todoList);
+            _context.TodoList.Remove(todoList);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -115,7 +115,7 @@ namespace TODOList.Controllers
 
         private bool TodoListExists(int id)
         {
-            return _context.TodoLists.Any(e => e.Id == id);
+            return _context.TodoList.Any(e => e.Id == id);
         }
     }
 }
