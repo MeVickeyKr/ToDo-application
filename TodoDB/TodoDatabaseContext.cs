@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using TodoDB.Entities;
 
-namespace TODOList.Models;
+namespace TodoDBContext;
 
 public partial class TodoDatabaseContext : DbContext
 {
+   
+
     public TodoDatabaseContext()
     {
     }
@@ -15,7 +18,7 @@ public partial class TodoDatabaseContext : DbContext
     {
     }
 
-    public virtual DbSet<Todo> TodoList { get; set; }
+    public virtual DbSet<TodoEntity> TodoList { get; set; }
 }
 
   
